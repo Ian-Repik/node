@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/Ian-Repik/node/issues"
   },
-  "homepage": "https://github.com/Ian-Repik/node#readme"
+  "homepage": "https://github.com/Ian-Repik/node#readme",
+  "dependencies": {
+    "express": "^5.3.0"
+  }
 }

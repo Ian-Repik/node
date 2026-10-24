@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/static/css/main.cc9fb709.css",
+    "main.js": "/static/js/main.4a9fb89e.js",
+    "static/media/Firefly_RemoveBackground.png": "/static/media/Firefly_RemoveBackground.9f00a61ae2fa2d23dcc9.png",
+    "static/media/303e6c3c-346c-42fd-a21b-40521509b4a4.png": "/static/media/303e6c3c-346c-42fd-a21b-40521509b4a4.1683feebd161e2b4627c.png",
+    "index.html": "/index.html",
+    "main.cc9fb709.css.map": "/static/css/main.cc9fb709.css.map",
+    "main.4a9fb89e.js.map": "/static/js/main.4a9fb89e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.cc9fb709.css",
+    "static/js/main.4a9fb89e.js"
+  ]
+}

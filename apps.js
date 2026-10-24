@@ -1,9 +1,15 @@
-var http = require("http");
+const express = require("express");
+const path = require("path");
+
+const app = express();
 const port = process.env.PORT || 3001;
 
-http
-  .createServer(function (req, res) {
-    res.writeHead(200, { "Content-Type": "text/html" });
-    res.end("Hello World!");
-  })
-  .listen(port);
+app.use(express.static(path.join(__dirname, "build")));
+
+app.get(/.*/, function (req, res) {
+    res.sendFile(path.join(__dirname, "build", "index.html"));
+});
+
+app.listen(port, "0.0.0.0", function () {
+    console.log("Server running on port " + port);
+});
