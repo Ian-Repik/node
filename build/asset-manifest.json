@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.8ffd834c.css",
-    "main.js": "/static/js/main.a3a6e1b1.js",
+    "main.css": "/static/css/main.cc46d4e1.css",
+    "main.js": "/static/js/main.6c41915c.js",
     "static/media/3906af61-7328-4282-b3ea-3c5945069ffb.png": "/static/media/3906af61-7328-4282-b3ea-3c5945069ffb.11b587c33c4b547e4527.png",
     "static/media/Firefly_RemoveBackground.png": "/static/media/Firefly_RemoveBackground.9f00a61ae2fa2d23dcc9.png",
     "static/media/IMG_5872.jpg": "/static/media/IMG_5872.81b4f74015797f88d2a9.jpg",
@@ -34,11 +34,11 @@
     "static/media/IMG_2262.jpg": "/static/media/IMG_2262.eae3cc3dd9540dad4e96.jpg",
     "static/media/alien_cat.jpg": "/static/media/alien_cat.ba8a2af89080086315f3.jpg",
     "index.html": "/index.html",
-    "main.8ffd834c.css.map": "/static/css/main.8ffd834c.css.map",
-    "main.a3a6e1b1.js.map": "/static/js/main.a3a6e1b1.js.map"
+    "main.cc46d4e1.css.map": "/static/css/main.cc46d4e1.css.map",
+    "main.6c41915c.js.map": "/static/js/main.6c41915c.js.map"
   },
   "entrypoints": [
-    "static/css/main.8ffd834c.css",
-    "static/js/main.a3a6e1b1.js"
+    "static/css/main.cc46d4e1.css",
+    "static/js/main.6c41915c.js"
   ]
 }

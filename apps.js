@@ -1,24 +1,43 @@
 const mongoose = require("mongoose");
+const express = require("express");
+const path = require("path");
 
-//testdb is name of database, it will automatically make it
-mongoose
-  .connect("mongodb+srv://repikian_db_user:<password>.mongodb.net/")
-  .then(() => console.log("Connected to mongodb..."))
-  .catch((err) => console.error("could not connect ot mongodb...", err));
+const app = express();
+const port = process.env.PORT || 3001;
 
+// MongoDB example from class
 const schema = new mongoose.Schema({
-  name: String,
+    name: String,
+});
+
+const Message = mongoose.model("Message", schema);
+
+const message = new Message({
+    name: "Hello World",
 });
 
 async function createMessage() {
-  const result = await message.save();
-  console.log(result);
+    const result = await message.save();
+    console.log(result);
 }
 
-//this creates a Message class in our app
-const Message = mongoose.model("Message", schema);
-const message = new Message({
-  name: "Hello World",
+mongoose
+    .connect(process.env.MONGODB_URI, { dbName: "testdb" })
+    .then(() => {
+        console.log("Connected to MongoDB...");
+        return createMessage();
+    })
+    .catch((err) => {
+        console.error("MongoDB error:", err);
+    });
+
+// Display the React website
+app.use(express.static(path.join(__dirname, "build")));
+
+app.get(/.*/, function (req, res) {
+    res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
-createMessage();
+app.listen(port, "0.0.0.0", function () {
+    console.log("Server running on port " + port);
+});
