@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.cc46d4e1.css",
-    "main.js": "/static/js/main.6c41915c.js",
+    "main.js": "/static/js/main.46b4ff2f.js",
     "static/media/3906af61-7328-4282-b3ea-3c5945069ffb.png": "/static/media/3906af61-7328-4282-b3ea-3c5945069ffb.11b587c33c4b547e4527.png",
     "static/media/Firefly_RemoveBackground.png": "/static/media/Firefly_RemoveBackground.9f00a61ae2fa2d23dcc9.png",
     "static/media/IMG_5872.jpg": "/static/media/IMG_5872.81b4f74015797f88d2a9.jpg",
@@ -35,10 +35,10 @@
     "static/media/alien_cat.jpg": "/static/media/alien_cat.ba8a2af89080086315f3.jpg",
     "index.html": "/index.html",
     "main.cc46d4e1.css.map": "/static/css/main.cc46d4e1.css.map",
-    "main.6c41915c.js.map": "/static/js/main.6c41915c.js.map"
+    "main.46b4ff2f.js.map": "/static/js/main.46b4ff2f.js.map"
   },
   "entrypoints": [
     "static/css/main.cc46d4e1.css",
-    "static/js/main.6c41915c.js"
+    "static/js/main.46b4ff2f.js"
   ]
 }
