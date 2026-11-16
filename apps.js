@@ -101,49 +101,50 @@ app.get("/api/artworks", (req, res) => {
     res.send(artworks);
 });
 
-const artworkSchema = Joi.object({
-    title: Joi.string().trim().min(3).max(80).required(),
-    medium: Joi.string().trim().min(3).max(80).required(),
-    year: Joi.string().trim()
-        .pattern(/^(19\d{2}|20\d{2}|2100)$/)
-        .required(),
-    description: Joi.string().trim().min(10).max(1000).required(),
-    img_name: Joi.string().valid(
-        "hanwia.jpg",
-        "sqiud.jpg",
-        "sk8.jpg",
-        "skely.jpg",
-        "alien_cat.jpg",
-        "grain_glow.jpg"
-    ).required()
-});
-
 app.post("/api/artworks", (req, res) => {
-    const { error, value } = artworkSchema.validate(req.body, {
-        abortEarly: false
-    });
+    const result = validateArtwork(req.body);
 
-    if (error) {
-        return res.status(400).json({
-            error: error.details.map((detail) => detail.message).join(" ")
+    if (result.error) {
+        res.status(400).send({
+            error: result.error.details[0].message
         });
+        return;
     }
 
     const artwork = {
-        _id: Math.max(...artworks.map((item) => item._id)) + 1,
-        ...value
+        _id: artworks.length + 1,
+        title: result.value.title,
+        medium: result.value.medium,
+        year: result.value.year,
+        description: result.value.description,
+        popupDescription: result.value.popupDescription,
+        img_name: result.value.img_name
     };
 
     artworks.push(artwork);
-    res.status(201).json(artwork);
+    res.status(201).send(artwork);
 });
 
-// Display the React website for other routes
-app.use(express.static(path.join(__dirname, "build")));
+const validateArtwork = (artwork) => {
+    const schema = Joi.object({
+        title: Joi.string().trim().min(3).max(80).required(),
+        medium: Joi.string().trim().min(3).max(80).required(),
+        year: Joi.string().trim()
+            .pattern(/^(19\d{2}|20\d{2}|2100)$/)
+            .required(),
+        description: Joi.string().trim().min(10).max(1000).required(),
+        img_name: Joi.string().valid(
+            "hanwia.jpg",
+            "sqiud.jpg",
+            "sk8.jpg",
+            "skely.jpg",
+            "alien_cat.jpg",
+            "grain_glow.jpg"
+        ).required()
+    });
 
-app.get(/.*/, function (req, res) {
-    res.sendFile(path.join(__dirname, "build", "index.html"));
-});
+    return schema.validate(artwork);
+};
 
 app.listen(port, "0.0.0.0", function () {
     console.log("Server running on port " + port);
