@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const express = require("express");
+const Joi = require("joi");
 const path = require("path");
 const cors = require("cors");
 
@@ -91,13 +92,50 @@ let artworks = [
         "year": "2025",
         "description": "A light sculpture I am still working on using a green traffic light and a repeating box shape.",
         "img_name": "grain_glow.jpg",
-        "link": "/in-progress"
+        "link": "/grain-and-glow"
     }
 ];
 
 // Provide artwork data to React
 app.get("/api/artworks", (req, res) => {
     res.send(artworks);
+});
+
+const artworkSchema = Joi.object({
+    title: Joi.string().trim().min(3).max(80).required(),
+    medium: Joi.string().trim().min(3).max(80).required(),
+    year: Joi.string().trim()
+        .pattern(/^(19\d{2}|20\d{2}|2100)$/)
+        .required(),
+    description: Joi.string().trim().min(10).max(1000).required(),
+    img_name: Joi.string().valid(
+        "hanwia.jpg",
+        "sqiud.jpg",
+        "sk8.jpg",
+        "skely.jpg",
+        "alien_cat.jpg",
+        "grain_glow.jpg"
+    ).required()
+});
+
+app.post("/api/artworks", (req, res) => {
+    const { error, value } = artworkSchema.validate(req.body, {
+        abortEarly: false
+    });
+
+    if (error) {
+        return res.status(400).json({
+            error: error.details.map((detail) => detail.message).join(" ")
+        });
+    }
+
+    const artwork = {
+        _id: Math.max(...artworks.map((item) => item._id)) + 1,
+        ...value
+    };
+
+    artworks.push(artwork);
+    res.status(201).json(artwork);
 });
 
 // Display the React website for other routes

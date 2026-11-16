@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ian Repik's Artwork API</title>
+</head>
+<body>
+    <header>
+        <h1>Ian Repik's Artwork API</h1>
+        <p>The server behind my React art gallery.</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>View Artwork</h2>
+            <p>GET /api/artworks returns the artwork list.</p>
+            <a href="/api/artworks">Open Artwork API</a>
+        </section>
+
+        <section>
+            <h2>Add Artwork</h2>
+            <p>POST /api/artworks adds artwork to the list.</p>
+
+            <ul>
+                <li>Title: 3–80 characters</li>
+                <li>Medium: 3–80 characters</li>
+                <li>Year: four-digit text from 1900–2100</li>
+                <li>Description: 10–1000 characters</li>
+                <li>Image: one of the six choices in the form</li>
+            </ul>
+
+            <p>
+                Successful requests return status 201.
+                Invalid requests return status 400 with an error message.
+            </p>
+
+            <a href="https://ian-repik.github.io/art-react/">
+                Visit my art site and open Gallery to use the form
+            </a>
+        </section>
+    </main>
+</body>
+</html>
