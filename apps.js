@@ -118,7 +118,7 @@ app.post("/api/artworks", (req, res) => {
     }
 
     const artwork = {
-        _id: artworks.length + 1,
+        _id: Math.max(0, ...artworks.map((artwork) => artwork._id)) + 1,
         title: result.value.title,
         medium: result.value.medium,
         year: result.value.year,
@@ -129,6 +129,60 @@ app.post("/api/artworks", (req, res) => {
 
     artworks.push(artwork);
     res.status(201).send(artwork);
+});
+app.put("/api/artworks/:id", (req, res) => {
+    const artwork = artworks.find(
+        (item) => item._id === Number(req.params.id)
+    );
+
+    if (!artwork) {
+        return res.status(404).send({
+            error: "Artwork not found."
+        });
+    }
+
+    const result = validateArtwork(req.body);
+
+    if (result.error) {
+        return res.status(400).send({
+            error: result.error.details[0].message
+        });
+    }
+
+    artwork.title = result.value.title;
+    artwork.medium = result.value.medium;
+    artwork.year = result.value.year;
+    artwork.description = result.value.description;
+    artwork.popupDescription = result.value.popupDescription;
+    artwork.img_name = result.value.img_name;
+
+    res.status(200).send(artwork);
+});
+app.delete("/api/artworks/:id", (req, res) => {
+    const result = Joi.number().integer().min(1).required()
+        .validate(req.params.id);
+
+    if (result.error) {
+        return res.status(400).send({
+            error: "Invalid artwork ID."
+        });
+    }
+
+    const artwork = artworks.find(
+        (item) => item._id === result.value
+    );
+
+    if (!artwork) {
+        return res.status(404).send({
+            error: "Artwork not found."
+        });
+    }
+
+    artworks = artworks.filter(
+        (item) => item._id !== result.value
+    );
+
+    res.status(200).send(artwork);
 });
 
 const validateArtwork = (artwork) => {
